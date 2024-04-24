@@ -3,6 +3,10 @@
         android:label="client"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"/>
+        <!-- Srac API-key: AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8 -->
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"
