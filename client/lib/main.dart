@@ -15,13 +15,25 @@ class _MyAppState extends State<MyApp> {
 
   final LatLng _center = const LatLng(45.521563, -122.677433);
 
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+
+
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+    setState(() {
+      MarkerId markerId = MarkerId('0');
+      markers[markerId] = Marker(
+        markerId: markerId,
+        position: const LatLng(45.521563, -122.677433),
+        infoWindow: InfoWindow(title: 'Portland', snippet: '*'),
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.green[700],
@@ -37,6 +49,7 @@ class _MyAppState extends State<MyApp> {
             target: _center,
             zoom: 11.0,
           ),
+          markers: Set<Marker>.of(markers.values)
         ),
       ),
     );
