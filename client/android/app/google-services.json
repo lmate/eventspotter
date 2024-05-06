@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "592418559933",
+    "firebase_url": "https://balmat-places-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "balmat-places",
+    "storage_bucket": "balmat-places.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592418559933:android:d14ae5cece523c9f0964d4",
+        "android_client_info": {
+          "package_name": "com.example.client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJJ8vzdv18Xel3jTcN8bp7OVmb3eF3xgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
