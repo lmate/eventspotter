@@ -11,7 +11,7 @@ Places is a [Flutter](https://flutter.dev/) mobile application that leverages [P
 
 ## Screenshots
 
-[Include screenshots or GIFs of your app in action, showcasing its user interface and key features.]
+//TODO
 
 ## Getting Started
 
