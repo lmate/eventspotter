@@ -90,7 +90,7 @@ export default async function startGetDailyPlaces() {
       if (result[0] == undefined) {
         upladPlaceToDb(eventsForToday[i], 0, 0, today)
       } else {
-        upladPlaceToDb(eventsForToday[i], parseFloat(result[0].lat), parseFloat(result[0].lon), today)
+        upladPlaceToDb(eventsForToday[i], result[0].lat, result[0].lon, today)
       }
 
     }, i * 3000)
