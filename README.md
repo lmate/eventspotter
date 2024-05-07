@@ -1,4 +1,4 @@
-# Places
+# EventSpotter
 
 Places is a [Flutter](https://flutter.dev/) mobile application that leverages [PocketBase](https://www.pocketbase.io/) as its backend database. It provides a list of experiences near you to enjoy based on your criteria.
 
