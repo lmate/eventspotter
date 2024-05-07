@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "firebase": "^10.11.0",
-    "html-to-json-parser": "^2.0.1"
-  },
-  "type": "module"
-}

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express": "^4.19.2",
+    "html-to-json-parser": "^2.0.1",
     "pocketbase": "^0.21.2"
   },
   "type": "module"
