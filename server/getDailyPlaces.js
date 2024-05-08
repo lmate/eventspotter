@@ -9,12 +9,7 @@ const authData = await pb.admins.authWithPassword(process.env.DB_EMAIL, process.
 
 async function getEventsForDate(date) {
   let fetchingPage = 1
-  let allEvents = [...(await getEvents(fetchingPage))]
-
-  while (allEvents.at(-1).startDate.split('T')[0] == date) {
-    fetchingPage++
-    allEvents = [...allEvents, ...(await getEvents(fetchingPage))]
-  }
+  let allEvents = [...(await getEvents(fetchingPage, date))]
 
   const newAllEvents = []
   for (const event of allEvents) {
@@ -27,10 +22,9 @@ async function getEventsForDate(date) {
   return allEvents
 }
 
-async function getEvents(page) {
-  let response = await fetch(`${requestUrl}${page == 1 ? '' : page}`)
+async function getEvents(page, date) {
+  let response = await fetch(`${requestUrl}${page == 1 ? '' : page}&cal=${date}`)
   let result = await response.text()
-
   let parsed = await HTMLToJSON(result, false)
 
   let newparsed = []
@@ -63,12 +57,25 @@ async function getEventsForToday() {
     return await getEventsForDate(new Date().toISOString().split('T')[0])
   } catch (e) {
     console.log('valmai error, nyilvan... Trying again in 30 seconds')
-    setTimeout(startGetDailyPlaces, 30000)
+    setTimeout(startGetDailyPlaceList, 30000)
   }
 }
 
-export default async function startGetDailyPlaces() {
-  let eventsForToday = await getEventsForToday()
+async function getEventsForNextSixDays() {
+  let events = []
+  for (let i = 0; i < 6 /* Six days */; i++) {
+    const date = new Date()
+    date.setDate(date.getDate() + i)
+    events = [...events, ...(await getEventsForDate(date.toISOString().split('T')[0]))]
+    console.log('------------------------------------------')
+    console.log(`Getting for day: ${date.toISOString().split('T')[0]}`)
+    console.log(events.length)
+  }
+  return events
+}
+
+export default async function startGetDailyPlaceList() {
+  let eventsForToday = await getEventsForNextSixDays()
 
   if (!getEventsForToday) {
     return
@@ -92,7 +99,7 @@ export default async function startGetDailyPlaces() {
       } else {
         upladPlaceToDb(eventsForToday[i], result[0].lat, result[0].lon, today)
       }
-
+      console.log(`Working on event ${i + 1} of ${eventsForToday.length}`)
     }, i * 3000)
   }
 
@@ -106,7 +113,7 @@ async function upladPlaceToDb(event, lat, lng, today) {
     const data = {
       "name": event.name,
       "start": event.startDate,
-      "date": today,
+      "date": event.startDate.split('T')[0],
       "url": event.url,
       "location_name": event.location.name,
       "address": event.location.address,

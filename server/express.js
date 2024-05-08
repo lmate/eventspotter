@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase';
 import express from 'express';
-import startGetDailyPlaces from './getDailyPlaces.js';
+import startGetDailyPlaceList from './getDailyPlaces.js';
 
 const app = express()
 const port = 3000
@@ -18,7 +18,7 @@ app.get('/api/places/today', async (req, res) => {
 })
 
 app.get('/api/getdailyplaces', async (req, res) => {
-  const places = await startGetDailyPlaces()
+  const places = await startGetDailyPlaceList()
   console.log(places)
   res.send(JSON.stringify(places))
 })
