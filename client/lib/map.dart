@@ -9,7 +9,7 @@ class Map extends StatefulWidget {
   @override
   State<Map> createState() => _MapState();
 
-  addMarker(GeoPoint point) async {
+  Future<void> addMarker(GeoPoint point) async {
     await Future.delayed(const Duration(seconds: 10));
     await mapController.addMarker(point, angle: 0);
     await mapController.setMarkerIcon(point,
@@ -39,8 +39,8 @@ class _MapState extends State<Map> {
         zoomOption: const ZoomOption(
           initZoom: 15,
           minZoomLevel: 12,
-          maxZoomLevel: 19,
-          stepZoom: 1.0,
+          maxZoomLevel: 18,
+          stepZoom: 2.5,
         ),
         userLocationMarker: UserLocationMaker(
           personMarker: const MarkerIcon(

@@ -4,7 +4,7 @@ import 'package:client/models/event_model.dart';
 import 'package:http/http.dart' as http;
 
 class EventService {
-  static const _baseUrl = 'http://10.44.7.216:3000/api';
+  static const _baseUrl = 'http://10.44.6.155:3000/api';
 
   Future<List<Event>> fetchPlaces() async {
     final response = await http.get(Uri.parse('$_baseUrl/places/today'));
