@@ -1,3 +1,4 @@
+import 'package:client/eventlist.dart';
 import 'package:client/models/event_model.dart';
 import 'package:client/services/event_service.dart';
 import 'package:client/map.dart';
@@ -24,10 +25,19 @@ class _MyAppState extends State<MyApp> {
   );
   final Map _map = Map(mapController: _mapController);
 
+  void centerMapAtLocation(double latitude, double longitude) {
+    _mapController.moveTo(GeoPoint(latitude: latitude, longitude: longitude), animate: true,);
+    _mapController.zoomIn();
+  }
+
   void getTodaysEvents() async {
+    print('event1');
     List<Event> events = await _eventService.fetchPlaces();
+    print('event2');
     setState(() {
       _events = events;
+      print('events:');
+      print(events);
     });
     showEventsOnMap();
   }
@@ -35,13 +45,15 @@ class _MyAppState extends State<MyApp> {
   void showEventsOnMap() async {
     for (int i = 0; i < _events.length; i++) {
       if (_events[i].lat != 0 && _events[i].lng != 0) {
-        _map.addMarker(GeoPoint(latitude: _events[i].lat, longitude: _events[i].lng));
+        _map.addMarker(
+            GeoPoint(latitude: _events[i].lat, longitude: _events[i].lng));
       }
     }
   }
 
   @override
   void initState() {
+    print('init');
     super.initState();
     getTodaysEvents();
   }
@@ -55,7 +67,23 @@ class _MyAppState extends State<MyApp> {
         colorSchemeSeed: Colors.green[700],
       ),
       home: Scaffold(
+        drawer: Drawer(
+            child: EventList(
+          events: _events,
+          onEventSelected: (event) {
+            centerMapAtLocation(event.lat, event.lng);
+          },
+        )),
         body: _map,
+        floatingActionButton: Builder(
+          builder: (context) => FloatingActionButton.extended(
+            onPressed: () {
+              Scaffold.of(context).openDrawer();                
+            },
+            icon: const Icon(Icons.menu),
+            label: const Text('Show Events'),
+          ),
+        ),
       ),
     );
   }
