@@ -9,9 +9,13 @@ Places is a [Flutter](https://flutter.dev/) mobile application that leverages [P
 - **Location Based Search:** Users can see events closed to them
 
 
-## Screenshots
+## Preview
 
-//TODO
+
+
+https://github.com/lmate/eventspotter/assets/130932233/1bf08b4e-979c-4aa2-9016-ac1dcb04116c
+
+
 
 ## Getting Started
 
